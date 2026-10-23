@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Kalam:wght@400;700&display=swap"><title>On the road to le TP de cuisine</title>
+<style>/* ==========================================================
+   DESIGN DU SITE : modifiez uniquement cette partie pour changer l'apparence
+   ========================================================== */
+:root{
+  --ac:#5f8f6e;          /* couleur principale (titres, contours, rond "Tout") */
+  --bd:#dfe8e1;          /* contour des fiches */
+  --hl:#e8f1ea;          /* fond clair */
+  --tx:#243029;          /* couleur du texte */
+  --mut:#6b7a70;         /* texte secondaire */
+  --bg:#fff;             /* fond de la page */
+  --card:#fff;           /* fond des fiches */
+  --police:Poppins,system-ui,sans-serif;                  /* police du site */
+  --police-todo:Kalam,"Segoe Print","Bradley Hand",cursive; /* police du bloc-notes */
+  --trait:#111;          /* contour, marge et cases du bloc-notes */
+  --lignes:#333;         /* lignes du bloc-notes */
+}
+/* Couleur du rond de chaque catégorie */
+.tabs button[data-t="h"]{--c:#2a8fe0} /* Hygiène */
+.tabs button[data-t="t"]{--c:#e5484d} /* Techniques */
+.tabs button[data-t="s"]{--c:#f08a24} /* Sauces */
+.tabs button[data-t="p"]{--c:#0fa3a3} /* Produits */
+.tabs button[data-t="d"]{--c:#e0529c} /* Pâtisserie */
+.tabs button[data-t="m"]{--c:#7c5cd6} /* Métier */
+.tabs button[data-t="n"]{--c:#3fae4f} /* Nutrition */
+.tabs button[data-t="g"]{--c:#d09a00} /* Gestion */
+/* ========== FIN DE LA PARTIE DESIGN (le reste règle la mise en page) ========== */
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 var(--police)}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.7rem;margin:.2em 0 0}
+.sub{color:var(--mut);margin:0 0 16px;font-family:var(--police);font-size:.9rem}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;font-family:var(--police)}
+input{width:100%;box-sizing:border-box;padding:11px 14px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font-size:1rem}
+.tabs{display:flex;gap:8px;margin-top:8px;overflow-x:auto;padding:8px 6px}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:4px;border:0;background:none;color:var(--tx);font-size:.72rem;cursor:pointer;min-width:64px;padding:2px}.tabs i{font-style:normal;width:46px;height:46px;border-radius:50%;border:2px solid var(--c,var(--ac));display:flex;align-items:center;justify-content:center;color:#fff;background:var(--c,var(--ac))}
+.tabs button.on{color:var(--c,var(--ac));font-weight:bold}.tabs button.on i{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--c,var(--ac))}
+details{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin:10px 0;padding:0 16px}
+summary{cursor:pointer;padding:13px 0;font-weight:bold;font-family:var(--police);display:flex;gap:8px;align-items:center}
+summary small{margin-left:auto;color:var(--mut);font-weight:normal;font-size:.75rem}
+details>div{padding-bottom:12px}
+ul{padding-left:20px;margin:.4em 0}h4{margin:1em 0 .2em;color:var(--ac);font-family:var(--police);font-size:.95rem}
+.tbl{overflow-x:auto}table{border-collapse:collapse;font-size:.9rem;min-width:100%}
+th,td{border:1px solid var(--bd);padding:6px 9px;text-align:left;vertical-align:top}th{background:var(--bg)}
+.warn{border-left:4px solid var(--ac);padding:2px 12px;margin:.7em 0;background:var(--bg)}
+.todo{position:relative;background:#fff repeating-linear-gradient(transparent 0 33px,var(--lignes) 33px 34px) 0 24px;color:#2f3d34;border:1px solid var(--trait);border-radius:6px;padding:24px 14px 12px 54px;margin:24px 0 18px;box-shadow:0 4px 0 -1px #e6e6e6,0 8px 0 -2px #cfcfcf,0 8px 16px rgba(0,0,0,.12);font-family:var(--police-todo);font-size:1.05rem}.todo::before{content:"";position:absolute;left:40px;top:22px;bottom:0;width:2px;background:var(--trait);opacity:.55}.todo::after{content:"";position:absolute;top:-10px;left:10px;right:10px;height:24px;background:radial-gradient(ellipse 3px 8px at 50% 40%,var(--trait) 98%,transparent 100%) 0 0/20px 24px repeat-x,radial-gradient(circle at 50% 75%,#cfcfcf 0 3px,transparent 3.5px) 0 0/20px 24px repeat-x}.todo h3{margin:0;line-height:34px;font-size:1.15rem;color:var(--trait)}.todo ul{list-style:none;padding:0;margin:0}.todo li{display:flex;align-items:center;gap:10px;min-height:34px;line-height:1.2;padding:3px 0}.todo li span{flex:1}.todo li.done span{text-decoration:line-through;color:#8a8a8a}.todo input[type=checkbox]{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;padding:0;margin:0;border:2px solid var(--trait);border-radius:4px;background:#fff;cursor:pointer}.todo input[type=checkbox]:checked{background:var(--trait) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/14px no-repeat}.todo li button,.todo .addrow button{border:0;background:none;color:#777;font-size:1.3rem;line-height:1;cursor:pointer;padding:0 4px}.todo .addrow{display:flex;align-items:center;gap:10px;min-height:34px}.todo .addrow button{color:var(--trait);font-size:1.6rem}.todo .addrow input{flex:1;border:0;border-radius:0;background:transparent;padding:0;font:inherit;color:inherit;outline:none;min-width:0}
+mark{background:var(--hl);color:inherit}.none{display:none;text-align:center;color:var(--mut)}
+
+/* Calendrier */
+.cal{display:none}
+.cal h3{margin:.2em 0;font-size:1.15rem;color:var(--ac)}
+.cal .ctl{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0;font-size:.82rem}
+.cal .ctl label{display:flex;flex-direction:column;gap:3px;color:var(--mut)}
+.cal input,.cal select{width:auto;padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
+.cal .prog{margin:.6em 0;font-size:.9rem}
+.cal .wk{border:1px solid var(--bd);border-radius:12px;margin:10px 0;overflow:hidden}
+.cal .wk h4{margin:0;padding:8px 14px;background:var(--hl);font-size:.82rem}
+.cal .r{display:flex;gap:12px;align-items:flex-start;padding:10px 14px;border-top:1px solid var(--bd);cursor:pointer}
+.cal .r input{flex:none;width:20px;height:20px;margin:2px 0 0;padding:0;accent-color:var(--ac)}
+.cal .r.today{outline:2px solid var(--ac);outline-offset:-2px}
+.cal .r.done .nm{text-decoration:line-through;color:var(--mut)}
+.cal .dt{flex:none;min-width:92px;font-weight:600;font-size:.82rem;color:var(--ac)}
+.cal .nm em{display:block;font-style:normal}
+.cal .nm small{display:block;color:var(--mut);font-size:.75rem}
+.cal .days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:10px 12px}
+.cal .dy{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font:inherit;font-size:.95rem;line-height:1.1;cursor:pointer}
+.cal .dy small{font-size:.62rem;text-transform:uppercase;color:var(--mut)}
+.cal .dy.td{outline:2px solid var(--ac);outline-offset:1px}
+.cal .dy.on{background:var(--ac);border-color:var(--ac);color:#fff}.cal .dy.on small{color:#fff}
+.cal .wk h4 span{float:right;font-weight:normal;color:var(--mut)}
+.cal .dt{text-transform:capitalize}
+.tabs button[data-t="c"]{--c:#a0714f} /* Calendrier */
+</style></head><body><main>
+<h1>🔪 On the road to le TP de cuisine</h1>
+<p class="sub">Toutes les rubriques (texte et tableaux)</p>
+<div class="todo"><h3>À faire</h3><ul id="tl"></ul><div class="addrow"><input id="ta" type="text" placeholder="Ajouter une tâche…" aria-label="Nouvelle tâche"><button id="tb" aria-label="Ajouter">+</button></div></div>
+<div class="bar"><input id="q" type="search" placeholder="Rechercher (ex : béarnaise, 63°C, DLC…)"><div class="tabs" id="tabs"><button class="on" data-t=""><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></i>Tout</button><button data-t="h"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></i>Hygiène</button><button data-t="t"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l1-5c2-6 7-9 13-9L9 15z"/><path d="M5 19l-1 1"/></svg></i>Techniques</button><button data-t="s"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="7" rx="4" ry="5"/><path d="M12 12v9"/></svg></i>Sauces</button><button data-t="p"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-5 9-6 14-2l4-3v10l-4-3c-5 4-11 3-14-2z"/><circle cx="8" cy="11" r=".8"/></svg></i>Produits</button><button data-t="d"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12l-2 8H8z"/><path d="M6 12a6 5 0 0 1 12 0"/></svg></i>Pâtisserie</button><button data-t="m"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14a4 4 0 1 1 2-7.5A4 4 0 0 1 15 6.5 4 4 0 1 1 17 14z"/><path d="M7 14v5h10v-5"/></svg></i>Métier</button><button data-t="n"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15z"/><path d="M5 19l8-8"/></svg></i>Nutrition</button><button data-t="g"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7a6 6 0 1 0 0 10M5 10h8M5 14h8"/></svg></i>Gestion</button><button data-t="c"><i><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></i>Calendrier</button></div></div>
+<!-- =====================================================
+  COURS : une fiche = un bloc <details>. Pour en ajouter une, copiez un bloc existant.
+  data-c = onglet : h Hygiène · t Techniques · s Sauces · p Produits · d Pâtisserie · m Métier · n Nutrition · g Gestion
+  Modèle :
+  <details data-c="s"><summary>🥄 Titre de la fiche<small>Sauces</small></summary><div>
+    <p>Un paragraphe.</p>
+    <h4>Un sous-titre</h4>
+    <ul><li>Une puce</li></ul>
+    <div class="warn">Un point important</div>
+  </div></details>
+===================================================== -->
+<p class="none" id="none">Aucun résultat.</p>
+
+<details data-c="h"><summary>🧼 Plan de nettoyage<small>Hygiène</small></summary><div>
+<p>Dans la démarche HACCP, il faut <b>prouver</b> que les locaux sont propres en permanence. Tous les employés et toutes les zones sont concernés. Le plan précise :</p>
+<ul><li>zones, équipements et ustensiles à nettoyer</li><li>détergents/désinfectants, dosages, durée d’application</li><li>responsabilités et compétences</li><li><b>méthodes et fréquence</b></li><li><b>procédures de suivi</b> (y compris nettoyage intermédiaire en cours de journée)</li></ul>
+<h4>4 paramètres d’efficacité</h4><p><b>Chaleur</b>, action <b>mécanique</b>, action <b>chimique</b>, <b>temps</b>.</p>
+<h4>Outils</h4><p>Raclette de sol, balai à poils durs, centrale de nettoyage. <b>Balai interdit en cuisine.</b></p>
+<div class="tbl"><table><tr><th>Zone</th><th>Détail</th><th>Fréquence</th></tr>
+<tr><td>Surfaces planes</td><td>Plans de travail et de service</td><td>Autant que nécessaire</td></tr>
+<tr><td>Sols</td><td></td><td>1 fois / service</td></tr>
+<tr><td>Chambre froide (sols)</td><td>Uniquement les sols</td><td>1 fois / jour</td></tr>
+<tr><td>Chambre froide</td><td>Murs, plafonds, étagères</td><td>1 fois / mois</td></tr>
+<tr><td>Fours</td><td>Programme pyrolyse</td><td>Selon utilisation</td></tr>
+<tr><td>Hottes</td><td>Nettoyeur vapeur, plonge</td><td>Selon utilisation</td></tr></table></div>
+<p>Légumes, herbes, salades : 10 cl de vinaigre blanc par litre d’eau, <b>toujours suivi d’un bac de rinçage</b>.</p></div></details>
+
+<details data-c="h"><summary>📦 Stockage et chambres froides<small>Hygiène</small></summary><div>
+<h4>Règles générales</h4><ul><li>Jamais à même le sol ; lourd en bas, léger en haut</li><li>Contenants fermés</li><li><b>FIFO</b> : nouveau derrière ancien</li><li>Produit infecté : détruit immédiatement</li><li>Produits d’entretien à part (local fermé à clef)</li></ul>
+<h4>Chambre froide positive (+3 à +7 °C)</h4><ul><li>Une famille de produits par frigo ; propre en haut, brut en bas</li><li>Plastique ou clayettes uniquement ; pas de cru avec du cuit</li><li>Produits entamés filmés et datés</li></ul>
+<h4>Chambre froide négative (−18 °C)</h4><ul><li>Étagères plastique dur ou inox ; cartons autorisés mais pas au sol</li><li><b>Ne jamais recongeler</b> un produit décongelé</li></ul>
+<h4>Économat</h4><p>Produits non périssables (DDM), à température ambiante.</p></div></details>
+
+<details data-c="h"><summary>🌡️ Températures<small>Hygiène</small></summary><div>
+<ul><li>🐠 Poisson frais : <b>0 à +2 °C</b></li><li>🍗 Viandes, volailles, produits laitiers : <b>+4 °C max</b></li><li>🥒 Fruits et légumes bruts : <b>+8 à +12 °C</b></li><li>🌾 Produits secs : +4 à +20 °C, au sec, à l’abri de la lumière</li></ul>
+<p>Référence : arrêté du 21 décembre 2009. Tolérance de 10 °C si consommé dans les 2 h.</p>
+<div class="warn">Vers <b>+37 °C</b> les bactéries doublent toutes les 20 min. Leur développement s’arrête à partir de <b>+63 °C</b>.</div>
+<h4>Chaîne du froid rompue</h4><ul><li>Produits fragiles : au-delà de 3 à 4 °C à cœur</li><li>Produits peu périssables : au-delà de 6 à 8 °C à cœur</li></ul>
+<p>Remontée en température : on peut cuire le produit s’il n’a pas été exposé plus d’<b>1 h</b> et ne dépasse pas <b>+10 °C à cœur</b>. Sinon : poubelle.</p>
+<h4>Relevés</h4><p><b>2 fois par jour</b>, à heure fixe, avec un thermomètre autonome (celui de la chambre froide ne compte pas). Conserver 3 mois minimum ; justifier les anomalies.</p>
+<h4>Température anormale : que faire ?</h4><ol><li>Prendre la température <b>à cœur</b> des produits (elle devient la référence)</li><li>Évaluer la durée de la rupture</li><li>Évaluer le risque selon l’aliment (24 h à 10 °C : risqué pour un filet de poisson, aucun risque pour un ananas)</li><li>Décider : destruction, transformation immédiate (cuisson) ou conservation</li></ol></div></details>
+
+<details data-c="h"><summary>🏷️ Traçabilité, DLC et DDM<small>Hygiène</small></summary><div>
+<ul><li>Conserver toutes les étiquettes <b>6 mois minimum</b> après consommation</li><li>L’étiquette sanitaire (n° de lot, DLC, agrément sanitaire) est le « bouclier juridique »</li><li>À réception : déconditionner, transférer en bacs propres fermés, reporter nom/lot/DLC sur le bac, ne jamais mettre l’étiquette au contact de l’aliment</li><li>Fiches de contrôle : date, fournisseur, denrées, température, n° de lots</li><li>Produit ouvert : archiver l’étiquette d’origine et poser une <b>DLC secondaire</b></li></ul>
+<div class="tbl"><table><tr><th></th><th>DLC</th><th>DDM</th></tr><tr><td>Sens</td><td>Date limite de consommation</td><td>Date de durabilité minimale</td></tr><tr><td>Après dépassement</td><td>Dangereux pour la santé</td><td>Qualités plus garanties, pas de danger</td></tr><tr><td>Mention</td><td>« À consommer jusqu’au… »</td><td>« À consommer de préférence avant… »</td></tr></table></div>
+<p>Produit ouvert ou « maison » : <b>3 jours maximum</b>. Herbes aromatiques : 3 à 5 jours au frigo.</p></div></details>
+
+<details data-c="h"><summary>🚚 Réception des marchandises<small>Hygiène</small></summary><div>
+<p>Bon de livraison + facture. Refuser ce qui n’a pas été commandé. On cherche : produits abîmés, emballages ouverts ou sales, dates dépassées, non-conformité au cahier des charges, dépassement des seuils (+4 °C viande, −18 °C surgelés).</p>
+<ul><li>Contrôler au moins <b>2 produits au hasard</b> (priorité aux plus sensibles)</li><li>Mesurer sans détruire (infrarouge ou sonde entre deux colis)</li><li>Si doute : sonde à aiguille désinfectée, température à cœur</li></ul>
+<div class="warn">Votre responsabilité est engagée dès la signature du bon. <b>C’est le chef qui accepte ou refuse la livraison.</b></div></div></details>
+
+<details data-c="h"><summary>♻️ Liaisons chaude et froide<small>Hygiène</small></summary><div>
+<p>Restauration différée : production en un point A, distribution en un point B.</p>
+<ul><li>☃️ <b>Liaison froide</b> : refroidissement (63 → 10 °C en moins de <b>2 h</b>) → chambre froide (0 à +3 °C) → remise à température (10 → 63 °C en moins d’<b>1 h</b>) → service</li><li>🌶️ <b>Liaison chaude</b> : préparation → maintien au chaud → conteneur isotherme (+63 °C) → maintien au chaud → service. Environ 2 h maximum.</li></ul></div></details>
+
+<details data-c="h"><summary>📖 Vocabulaire de la conservation<small>Hygiène</small></summary><div>
+<ul><li><b>Congélation</b> : −18 °C</li><li><b>Surgélation</b> : refroidissement très rapide, conservation entre −30 et −50 °C</li><li><b>Réfrigération</b> : 0 à 4 °C</li><li><b>Appertisation</b> : stérilisation à la chaleur en récipient clos (conserves, bocaux)</li><li><b>Pasteurisation</b> : chaleur puis refroidissement brutal (lait, crèmes, jus)</li><li>Poisson surgelé : <b>IQF</b> (individuellement), <b>bloc</b>, <b>HGT</b> (sans tête, vidé)</li></ul>
+<p>Décongélation du poisson : sur plaque à trous ou grille, au froid positif, minimum 6 h.</p></div></details>
+
+<details data-c="t"><summary>🥕 Les découpes<small>Techniques</small></summary><div>
+<div class="tbl"><table><tr><th>Cubes (côté)</th><th>Bâtonnets (épaisseur)</th><th>Sifflets</th></tr>
+<tr><td>Brunoise : 3 mm</td><td>Julienne : 2 mm</td><td>Fin : 2 mm</td></tr>
+<tr><td>Macédoine : 5 mm</td><td>Allumette : 3 mm</td><td>Moyen : 5 mm</td></tr>
+<tr><td>Mirepoix : 1 cm</td><td>Jardinière : 5 mm</td><td>Épais : 5 mm à 1 cm</td></tr>
+<tr><td>Pommes Pont-Neuf : 1,5 cm</td><td>Frite : 1 cm</td><td></td></tr></table></div>
+<ul><li><b>Ciseler</b> : petits dés · <b>Émincer</b> : tranches fines · <b>Paysanne</b> : paillettes de 1 cm</li><li><b>Tourner</b> : forme oblongue régulière à 7 faces, pour une cuisson homogène</li></ul>
+<h4>Agrumes</h4><p>On <b>zeste</b> ou on <b>cannelle</b> la peau ; on pèle à vif ; on lève les segments ; on <b>historie</b> pour une forme dentelée.</p></div></details>
+
+<details data-c="t"><summary>🔥 Le vocabulaire des cuissons<small>Techniques</small></summary><div>
+<ul><li><b>Blanchir</b> : dessaler, ôter l’amertume ou l’amidon, raffermir, fixer la couleur</li><li><b>Saisir</b> : colorer la surface (brunir, rissoler)</li><li><b>Déglacer</b> : décoller les sucs avec un liquide ; <b>dégraisser</b> : retirer l’excès de gras</li><li><b>Gratiner</b> : chalumeau, salamandre ou four</li><li><b>Glacer</b> : cuire avec très peu d’eau puis enrober de sirop (à blanc ou à brun)</li><li><b>Rôtir</b> : chaleur sèche (four, braise, broche, poêle)</li><li><b>Braiser</b> : cuisson lente à couvert, liquide qui ne dépasse pas la moitié de la pièce (à blanc ou à brun)</li><li><b>Suer</b> : évaporer l’eau de végétation (pré-cuisson) · <b>Étuver</b> : cuisson complète à couvert, feu doux</li><li><b>Sauter</b> : cuisson rapide dans un corps gras · <b>Rissoler</b> : colorer après blanchiment</li></ul>
+<h4>Cuisson à l’anglaise</h4><p>Eau bouillante salée, sans couvercle, puis eau glacée. Saler quand l’eau est déjà chaude.</p>
+<h4>Pocher</h4><p>Cuire dans un liquide : attendrir (cuisson longue), cuire juste à température, ou parfumer.</p>
+<h4>Bain-marie</h4><p>Chaleur douce et régulière. La casserole est plus étroite que le bol, l’eau ne touche pas le bol.</p>
+<h4>Friture</h4><ul><li>160 à 180 °C, jamais plus de 190 °C</li><li>2/3 d’huile pour 1/3 de produit</li><li>≈ 10 min pour des frites, <b>max 20 min</b></li></ul><div class="warn">Jamais d’eau dans une friteuse : risque d’explosion.</div></div></details>
+
+<details data-c="t"><summary>🥚 Cuisson des œufs<small>Techniques</small></summary><div>
+<div class="tbl"><table><tr><th>Œuf</th><th>Temps</th><th>Température</th></tr><tr><td>Coque</td><td>3 min</td><td>100 °C</td></tr><tr><td>Mollet</td><td>6 min</td><td>100 °C</td></tr><tr><td>Dur</td><td>9 min</td><td>100 °C</td></tr><tr><td>Poché</td><td>3 min</td><td>90 °C</td></tr><tr><td>Parfait</td><td>45 min</td><td>64 °C</td></tr></table></div>
+<p>Conservation : 3 jours maximum (œufs durs : jusqu’à 1 semaine au frais).</p></div></details>
+
+<details data-c="t"><summary>🫘 Légumineuses, décoction, infusion, macération<small>Techniques</small></summary><div>
+<ul><li><b>Trempage</b> : obligatoire pour haricots rouges/blancs, facultatif pour les lentilles. Eau : 4 fois le volume. Min. 2 h, en moyenne 6 h, jusqu’à 12 h. Jamais plus de 24 h.</li><li><b>Saler en fin de cuisson</b> seulement (sinon la peau durcit).</li><li><b>Décoction</b> : parties dures des végétaux, départ eau froide, 2 à 15 min d’ébullition, puis filtrer</li><li><b>Infusion</b> : végétal dans liquide bouillant, qu’on laisse refroidir</li><li><b>Macération</b> : solide dans un liquide <b>froid</b> sur un long moment (saumure, marinade…)</li></ul></div></details>
+
+<details data-c="t"><summary>📉 La réduction<small>Techniques</small></summary><div>
+<p>Concentrer les saveurs d’un liquide par évaporation : on gagne en viscosité, en couleur, en intensité, et on réduit le volume.</p>
+<div class="tbl"><table><tr><th>Sauce</th><th>Base</th><th>Réduction</th></tr>
+<tr><td>Béarnaise</td><td>Vinaigre blanc, échalote, poivre, estragon, cerfeuil</td><td>≈ 90 %</td></tr>
+<tr><td>Hollandaise</td><td>Vin blanc, jus de citron</td><td>≈ 80 %</td></tr>
+<tr><td>Gastrique</td><td>Sucre, vinaigre (base des sauces aux fruits)</td><td>≈ 90 %</td></tr>
+<tr><td>Diable</td><td>Vinaigre rouge, échalote, poivre</td><td>≈ 80 %</td></tr>
+<tr><td>Vin blanc</td><td>Vin blanc, échalote</td><td>≈ 60 %</td></tr></table></div></div></details>
+
+<details data-c="t"><summary>🥣 Mariner, émulsion, foisonnement<small>Techniques</small></summary><div>
+<ul><li><b>Marinade</b> : instantanée (max 2 h), crue (max 48 h) ou cuite (marinade bouillie puis refroidie)</li><li><b>Émulsion</b> : huile/eau, eau/huile ou air/eau, avec un émulsifiant (tensioactif)</li><li><b>Foisonner</b> : incorporer de l’air, acte mécanique</li></ul></div></details>
+
+<details data-c="s"><summary>🥄 Vinaigrette, mayonnaise<small>Sauces</small></summary><div>
+<ul><li><b>Vinaigrette</b> : 3 volumes de gras pour 1 de vinaigre</li><li><b>Mayonnaise</b> : jaune d’œuf, sel (le mélanger au jaune avant l’huile), moutarde, huile ajoutée progressivement (plus d’huile = plus ferme)</li></ul>
+<p>Toute protéine d’œuf fonctionne (œuf entier, jaune cuit, mollet), tout comme le corail des crustacés.</p></div></details>
+
+<details data-c="s"><summary>🧈 Roux et béchamel<small>Sauces</small></summary><div>
+<p>Le roux est un « tant pour tant » de farine et de matière grasse.</p>
+<ul><li><b>Blanc</b> : quelques minutes sans coloration (≈ 5 min) → sauces blanches</li><li><b>Brun</b> : 10 à 15 min avec coloration → sauces brunes</li><li>Se mélange froid à un liquide chaud, ou chaud à un liquide froid</li></ul>
+<div class="tbl"><table><tr><th>Pour 1 L de lait</th><th>Résultat</th></tr><tr><td>40 g de farine</td><td>Sauce liquide</td></tr><tr><td>60 g de farine</td><td>Béchamel épaisse mais fluide</td></tr><tr><td>100 g de farine</td><td>Béchamel qui se tient (quasi solide à froid)</td></tr></table></div>
+<p>Béchamel : beurre, lait, farine, noix de muscade. Variante végétale : margarine + lait végétal.</p></div></details>
+
+<details data-c="s"><summary>🍋 Béarnaise, hollandaise, beurre clarifié<small>Sauces</small></summary><div>
+<p>Une <b>émulsion</b> est une dispersion de gouttelettes de gras dans un liquide en présence d’un émulsifiant.</p>
+<ul><li><b>Béarnaise</b> : réduction (échalotes, vinaigre, poivre mignonnette, estragon, sel) + sabayon à chaud + beurre clarifié. Se garde le temps d’un service.</li><li><b>Hollandaise</b> : sabayon de jaunes d’œufs, beurre clarifié, jus de citron.</li><li><b>Beurre clarifié</b> : on sépare la partie grasse de la partie liquide, ce qui permet de chauffer plus haut sans brûler.</li></ul></div></details>
+
+<details data-c="s"><summary>🍷 Beurre blanc (recette)<small>Sauces</small></summary><div>
+<p><b>Ingrédients :</b> 3 échalotes, 10 cl de vin blanc sec, 5 cl d’eau, 1 c. à soupe de vinaigre, 200 g de beurre froid en dés, sel, pointe de piment de Cayenne.</p>
+<ol><li>Ciseler finement les échalotes.</li><li>Réunir vin, vinaigre et épices, ajouter les échalotes, <b>réduire presque à sec</b> (pas trop vite).</li><li>Ajouter le beurre froid petit à petit en fouettant en « 8 », jusqu’à une légère ébullition qui stabilise l’émulsion.</li><li>Filtrer si souhaité. Garder au bain-marie, <b>sans jamais refaire bouillir</b>.</li></ol>
+<p><i>Variantes :</i> beurre fondu (citron, sel, piment) ; beurre nantais (muscadet, sans vinaigre).</p></div></details>
+
+<details data-c="s"><summary>🍲 Jus, fonds, bouillons, fumets<small>Sauces</small></summary><div>
+<ul><li><b>Jus</b> : on dénature le moins possible ; suffit comme sauce</li><li><b>Fond</b> : concentré de saveurs, recette intermédiaire pour faire une sauce</li><li><b>Bouillon</b> : fond dont on consomme les matières nobles</li><li><b>Fumet</b> : produits de la mer (et fond de gibier)</li><li>Fond blanc / brun : uniquement selon la coloration</li><li>Fond lié (liaison dès le début, « singer ») / clair (sans liaison)</li></ul>
+<h4>Repères</h4><ul><li>Fond blanc : 2 h de cuisson minimum</li><li>Fumet de poisson : 20 min. Poissons blancs : fumets clairs ; poissons plats : gélatineux ; gras (saumon, maquereau) : troubles</li><li>Bouillon végétal : 500 g de végétaux pour 1 L fini ; éviter choux, navets, pommes de terre</li></ul></div></details>
+
+<details data-c="s"><summary>🍖 Ragoût, braisé, poché<small>Sauces</small></summary><div>
+<div class="tbl"><table><tr><th>Ragoût</th><th>Braisé</th><th>Poché</th></tr><tr><td>Sauce liée à l’amidon (on <b>singe</b> avec de la farine)</td><td>Texture donnée par le collagène (gélatine)</td><td>Liquide qui recouvre entièrement, sauce non liée pendant la cuisson</td></tr></table></div>
+<p>Exemples : carbonade flamande, bœuf bourguignon, navarin d’agneau, goulache.</p></div></details>
+<details data-c="m"><summary>👨‍🍳 La brigade<small>Métier</small></summary><div><p>Terme militaire appliqué à la cuisine par Escoffier.</p><ul><li><b>Entremétier</b> : potages, œufs, légumes frais et secs (sauf frits/grillés), entrées chaudes (quiches, soufflés, gnocchis) ; entremets s’il n’y a pas de pâtissier</li><li><b>Garde-manger</b> : cuisine froide, réception et contrôle des denrées, parage et piéçage des viandes, filetage des poissons, gestion des stocks</li><li><b>Grillardin</b> : viandes et poissons grillés, parfois fritures, habillage des volailles, jus de rôti, béarnaise</li><li><b>Communard</b> : repas du personnel</li><li><b>Tournant</b> : remplace les chefs de partie en repos</li></ul></div></details>
+<details data-c="m"><summary>🧥 Tenue, EPI et matériel<small>Métier</small></summary><div><h4>Tenue</h4><p>Veste, pantalon, tour du cou, tablier (à changer chaque jour), chaussures de sécurité, toque.</p><h4>EPI</h4><p>Gants jetables, chaussures antidérapantes, couvre-chef, masquets, lunettes de protection.</p><h4>Ma liste de matériel</h4><p>Couteau de chef 20-25 cm, couteau à filet de sole 20 cm, fouet 25-28 cm, spatule polyglass, spatule plate inox 25 cm, pince inox, pince à chiqueter, calotte fond plat, bac gastro, planche plastique, corne, poches à douille, rouleau sans poignée, thermomètre, 2 torchons, coiffe.</p></div></details>
+<details data-c="m"><summary>📜 Histoire de la cuisine<small>Métier</small></summary><div><ul><li>800 000 av. J.-C. : découverte du feu</li><li>5000 av. J.-C. : fermentation</li><li>100 av. J.-C. : banquets romains</li><li>IVe siècle : livre de cuisine romain (<i>De Re Coquinaria</i>, Apicius)</li><li>XIVe : premier livre de cuisine moderne</li><li>1686 : ouverture du Procope</li><li>1850 : essor des brasseries parisiennes</li></ul></div></details>
+<details data-c="n"><summary>🥑 Macro-nutriments<small>Nutrition</small></summary><div><ul><li><b>Lipides</b> : structure des membranes cellulaires, stockage d’énergie. Sources : œufs, viande, avocat, olives, beurre, huile. Types : saturés, mono-insaturés, poly-insaturés, oméga-3. Apport noté : 25 g (à vérifier)</li><li><b>Glucides</b> : énergie pour muscles et cerveau. Rapides (sucre blanc, ajoutés) ou lents (céréales complètes, légumineuses, légumes, fruits). Apport noté : 20 g (à vérifier)</li><li><b>Protides</b> : matière vivante (muscles). Une vingtaine d’acides aminés indispensables ; animales ou végétales. Apport : 0,83 g/kg/jour</li></ul></div></details>
+<details data-c="n"><summary>🍊 Vitamines, minéraux, quantités<small>Nutrition</small></summary><div><ul><li><b>13 vitamines</b>, sans valeur énergétique : <b>hydrosolubles</b> (C et groupe B) et <b>liposolubles</b> (A, D, E, K). La D vient du soleil.</li><li><b>Minéraux</b> : fer, zinc, chrome, iode, cuivre, sodium…</li><li>Un repas adulte : <b>400 à 550 g</b></li><li><b>PNNS</b> (Programme National Nutrition Santé) : alimentation, activité physique, sédentarité. PNNS 5 : 2026-2030.</li></ul></div></details>
+<details data-c="p"><summary>🐟 Poisson : fraîcheur, cuisson, portions<small>Produits</small></summary><div><ul><li>Cuit à cœur vers 50-55 °C (la loi impose 63 °C). Pochage : 70-80 °C.</li><li><b>Fraîcheur</b> : yeux clairs et bombés, rigidité, peau brillante avec mucus, branchies rouge vif, odeur d’iode. À consommer sous 24-48 h, conservé à 0/+2 °C.</li><li><b>Cru</b> : congeler à −20 °C pendant 24 h minimum (ou 96 h à −18 °C), décongeler au froid positif.</li><li>Portions nettes : petite entrée 60 g · entrée 80 g · plat de menu 110-140 g · plat 150 g</li><li>Lever les filets : séances de 20 min max (chaîne du froid)</li></ul><div class="tbl"><table><tr><th>Type</th><th>Exemples</th></tr><tr><td>Plat, 2 filets</td><td>Dorade, Saint-Pierre</td></tr><tr><td>Plat, 4 filets</td><td>Sole, turbot, barbue, limande</td></tr><tr><td>Rond, 2 filets</td><td>Saumon, cabillaud, bar, merlan, lieu, maquereau, truite</td></tr></table></div><h4>Liquides de pochage</h4><ul><li><b>Court-bouillon</b> : bouillon de légumes salé, ≈ 20 min</li><li><b>Nage</b> : court-bouillon acidifié ; crustacés et coquillages</li><li><b>Au bleu</b> : poissons d’eau douce (truite), nage très acide, mucus conservé</li><li><b>Au lait</b> : poissons plats à 4 filets, haddock, morue</li></ul></div></details>
+<details data-c="p"><summary>🦪 Coquillages<small>Produits</small></summary><div><ul><li><b>Bivalves</b> : moules, huîtres, palourdes, coques, Saint-Jacques… <b>Gastéropodes</b> : bulots, bigorneaux, escargots</li><li>Livraison : fermés (impossible à ouvrir au doigt), odeur agréable, conservés à 5-15 °C</li><li>Moules : à consommer sous 48 h ; 550 à 770 g par personne</li><li>Lavés et préparés : consommés dans la journée</li><li>Cuisson : stopper dès l’ouverture des coquilles</li></ul></div></details>
+<details data-c="p"><summary>🥩 Viande et volaille<small>Produits</small></summary><div><p>Toujours tempérer avant cuisson, reposer avant service.</p><div class="tbl"><table><tr><th>Cuisson</th><th>À cœur</th><th>Repère</th></tr><tr><td>Bleu</td><td>45-50 °C</td><td>Bœuf uniquement, chaude mais crue</td></tr><tr><td>Saignant</td><td>54 °C</td><td>1-2 min</td></tr><tr><td>À point</td><td>59 °C</td><td>Jus translucide</td></tr><tr><td>Bien cuit</td><td>64 °C</td><td>Plus de sang</td></tr></table></div><ul><li>Compter 160 à 220 g par personne (entrecôte double : 300-400 g)</li><li><b>Viande hachée</b> : très sensible, 2 h max entre découpe et service</li><li>Volaille <b>PAC</b> (prête à cuire) : habiller, brider, assaisonner après massage au gras, arroser, four 200-220 °C, repos</li></ul></div></details>
+<details data-c="p"><summary>🥬 Mesclun, fromages, épices<small>Produits</small></summary><div><ul><li><b>Mesclun</b> : au moins 5 variétés. Laver en 3 bains (le 1er avec 1-2 % de vinaigre blanc, 20 min), essorer, bac à grille. Se garde 3 à 5 jours.</li><li><b>Fromages</b> : frais ; pâte molle croûte fleurie (camembert, brie) ou lavée (époisses, munster) ; pressée non cuite (saint-nectaire) ou cuite (comté, beaufort) ; persillée (roquefort) ; chèvre</li><li>Épices : saupoudrage, décoction ou infusion</li></ul></div></details>
+<details data-c="d"><summary>🧁 Crèmes et meringues<small>Pâtisserie</small></summary><div><div class="tbl"><table><tr><th>Crème</th><th>Composition</th><th>Usage</th></tr><tr><td>Pâtissière</td><td>Lait, vanille, sucre, jaunes, farine</td><td>Base, éclair, mille-feuille</td></tr><tr><td>Diplomate</td><td>Pâtissière + chantilly + gélifiant</td><td>Entremets</td></tr><tr><td>Chiboust</td><td>Pâtissière + meringue + gélifiant</td><td>Saint-Honoré, caramélisable</td></tr><tr><td>Mousseline</td><td>Pâtissière + beurre pommade</td><td>Fraisier, Paris-Brest</td></tr><tr><td>Légère</td><td>Pâtissière + chantilly</td><td>Desserts minute</td></tr></table></div><h4>3 meringues</h4><ul><li><b>Française</b> : blancs montés + sucre (crue ou séchée à 100 °C)</li><li><b>Suisse</b> : blancs + sucre glace au bain-marie, sans dépasser 62 °C (pavlova)</li><li><b>Italienne</b> : sirop cuit au gros boulet (118-125 °C) versé sur les blancs (macarons, chiboust)</li></ul><p>Bavarois : base aromatique (crème anglaise ou purée de fruits) gélifiée et allégée de chantilly.</p></div></details>
+<details data-c="d"><summary>🥚 Sabayon<small>Pâtisserie</small></summary><div><p>Œufs cuits avec sucre et liquide, en émulsionnant pour gagner en volume. Cuit quand il forme un <b>ruban</b>. Ne pas dépasser <b>65 °C</b>. 3 méthodes : bain-marie, batteur avec sirop à 120 °C, casserole.</p><ul><li>15 à 30 g de sucre par jaune (20 à 40 g par œuf)</li><li>1 à 2 cl de liquide par œuf</li><li>Sabayon à froid : ne cuit pas les œufs, 24 h max</li></ul></div></details>
+<details data-c="d"><summary>🍦 Glaces et sorbets<small>Pâtisserie</small></summary><div><ul><li><b>Crème glacée</b> : lait/crème sans œuf, min. 14 % sucre, 7 % matière grasse</li><li><b>Glace aux œufs</b> : base anglaise, min. 16 % sucre, 7 % jaunes, 2 % MG laitière</li><li><b>Sorbet</b> : sirop + fruits, min. 35 % (fruits doux) ou 15 % (acides)</li><li><b>Granité</b> : paillette en grattant, sans foisonnement · <b>Spoom</b> : sorbet + 1/5 de meringue italienne</li><li>Maturer 24 h à 4 °C ; turbiner (glaces) / sangler (sorbets) ; conserver à −18 °C ; servir vers −10 °C après 1 h</li></ul></div></details>
+<details data-c="d"><summary>🍬 Cuisson du sucre et chocolat<small>Pâtisserie</small></summary><div><div class="tbl"><table><tr><th>°C</th><th>État</th></tr><tr><td>101</td><td>Sirop</td></tr><tr><td>105</td><td>Petit perlé</td></tr><tr><td>107</td><td>Perlé</td></tr><tr><td>111</td><td>Grand soufflé</td></tr><tr><td>115 / 117 / 120</td><td>Petit boulet / boulet / grand boulet</td></tr><tr><td>125-135</td><td>Petit cassé</td></tr><tr><td>145-150</td><td>Grand cassé</td></tr><tr><td>150-155</td><td>Caramel clair</td></tr><tr><td>165-190</td><td>Caramel brun à foncé</td></tr></table></div><p>Au-delà de 190 °C : trop amer ; 210 °C : carbonise. Caramel à sec : 150 °C, stopper avec de l’eau ou du lait <b>chaud</b>. Sirop 30° Baumé = 1 volume de sucre pour 1 d’eau ; 15° = 1 pour 2.</p><p><b>Fonte du chocolat</b> : noir 50-55 °C, lait 45-50 °C, blanc 40-45 °C. Bain-marie sans ébullition.</p></div></details>
+<details data-c="d"><summary>🥐 Brioche, pâte à choux, gélifiants<small>Pâtisserie</small></summary><div><ul><li><b>Pâte à choux</b> : farine, beurre, œufs, eau, sel. Cuit d’abord à la casserole (panade). Tamiser la farine, filtrer les œufs.</li><li><b>Brioche</b> (levure de boulanger, jamais en contact avec le sel) : frasage 3-4 min, pétrissage jusqu’au test de la fenêtre, ajout du beurre, repos 30-45 min, rompre, façonner, dorer, pousse 1-2 h à 25-27 °C (ou une nuit), re-dorer. Cuisson : petites pièces 180-200 °C, grosses 160-165 °C. Optimale dans les 24 h.</li><li><b>Gélatine</b> : animale, réversible · <b>Agar-agar</b> : végétal, non réversible, prend après ébullition · <b>Pectine</b> : inserts · <b>Xanthane</b> : texture</li></ul></div></details>
+<details data-c="s"><summary>🧈 Beurres composés, beurre manié, siphon<small>Sauces</small></summary><div><ul><li><b>Beurre composé cru</b> : beurre pommade + éléments (maître d’hôtel, ail, crevette, basilic…), éléments cuits refroidis avant</li><li><b>Beurre composé cuit</b> : beurre fondu infusé, plus parfumé</li><li><b>Beurre manié</b> : beurre froid + farine, rectification de dernière minute (jus de crustacés vers une bisque)</li><li><b>Liaison au velouté</b> : pour 1 L de sauce, 1 dL de crème + 1 jaune (blanquette)</li><li><b>Siphon</b> : appareil lisse et fluide, rempli au 2/3 max, cartouche N2O (crèmes) ou CO2 (boissons), vider le gaz avant d’ouvrir, conservation 1-2 jours</li></ul></div></details>
+<details data-c="h"><summary>✅ HACCP, PMS et 5 M<small>Hygiène</small></summary><div><p><b>5 M</b> : Méthode, Matériel, Main-d’œuvre, Milieu, Matières premières (recherche des causes d’un problème).</p><h4>7 principes HACCP</h4><ol><li>Analyse des dangers</li><li>Points critiques (CCP)</li><li>Seuils critiques</li><li>Système de surveillance</li><li>Actions correctives</li><li>Vérification</li><li>Dossier et relevés (traçabilité)</li></ol><p><b>PMS</b> (Plan de Maîtrise Sanitaire) = BPH + plan HACCP + traçabilité et gestion de crise. Il doit être consultable sur site, connu de l’équipe et présenté aux inspecteurs.</p></div></details>
+<details data-c="h"><summary>🗑️ Déchets, risques, contaminations<small>Hygiène</small></summary><div><ul><li><b>Limiter les déchets</b> : FIFO, inventaire mensuel, commandes ajustées, fiches techniques et grammages respectés</li><li><b>Tri</b> : biodéchets (sacs transparents), non alimentaires, cartons, verre. Aussi : huiles usagées, bacs à graisse</li><li><b>Déchets industriels</b> : banals (emballages), dangereux (huile), inertes (gravats)</li><li><b>Risques</b> : physiques (chutes, brûlures, TMS, outils tranchants), biologiques, psychologiques</li><li><b>Facteurs exogènes</b> : chaud, froid, bruit, humidité</li><li><b>Contaminations</b> : primaire (initiale) ou exogène (recontamination)</li><li><b>Maintenance</b> : prévoir ≈ 10 % du prix d’achat par an</li></ul></div></details>
+<details data-c="g"><summary>💶 Ratio et coefficient<small>Gestion</small></summary><div><ul><li>Ratio théorique = produits achetés / chiffre d’affaires (cible <b>25 %</b>)</li><li>Coefficient de vente = marge / coût matière (cible <b>4</b>)</li><li>Prix de vente = coefficient × ratio théorique</li></ul><p class="sub">Formules telles que dans mes notes : à revérifier avec le cours.</p></div></details>
+<details data-c="g"><summary>📋 Affichage, allergènes, contrôles<small>Gestion</small></summary><div><ul><li><b>Affichage extérieur</b> : carte et menu identiques à l’intérieur ; prix des 5 vins les plus servis (sinon 5 boissons) ; débit de boissons : 9 boissons/denrées les plus servies</li><li><b>Provenance des viandes</b> : naissance, élevage, abattage (depuis 2003)</li><li><b>Labels</b> : Fait maison, Maître restaurateur, Clef verte, Écotable</li><li><b>DGCCRF/DDPP</b> : concurrence, protection économique, sécurité des consommateurs. Résultats des contrôles : Alim’confiance (depuis 2017).</li></ul><h4>14 allergènes à déclaration obligatoire</h4><p>Gluten, crustacés, œufs, poissons, arachides, soja, lait, fruits à coques, céleri, moutarde, sésame, sulfites, lupin, mollusques. Attention aux sauces et préparations industrielles (traces) et aux sulfites des jus, sirops et conserves.</p></div></details>
+<div class="cal" data-c="c"><h3>Calendrier des recettes du TP</h3>
+<p>Liste obligatoire du TP : 11 numéros (du 2 au 12). Chaque numéro est une recette complète, dont les plats se préparent ensemble. Pour chaque semaine, appuyez sur les 2 ou 3 jours où vous cuisinez : les recettes sont attribuées dans l’ordre aux jours choisis. Cochez une recette une fois réalisée.</p>
+<div class="ctl"><label>Semaine de départ (une date de cette semaine)<input type="date" id="cstart"></label></div>
+<div id="calout"></div></div>
+</main>
+<script>const q=document.getElementById('q'),ds=[...document.querySelectorAll('details,.cal')];let tab='';
+function f(){const t=q.value.trim().toLowerCase();let n=0;
+ds.forEach(d=>{const cl=d.classList.contains('cal'),ok=cl?tab==='c':(!tab||d.dataset.c===tab)&&(!t||d.textContent.toLowerCase().includes(t));d.style.display=ok?(cl?'block':''):'none';d.open=!!t&&ok;if(ok)n++});
+document.getElementById('none').style.display=n?'none':'block'}
+q.oninput=f;
+document.getElementById('tabs').onclick=e=>{const k=e.target.closest('button');if(!k)return;tab=k.dataset.t;
+document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b===k));f()};
+const KEY='cap-todo';let T=null;
+try{T=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+if(!Array.isArray(T))T=[{t:'Prendre connaissance du MIN (Module 2)',d:0},{t:'Mesure exacte sur la fiche technique ? Ex : 0,04 kg de carottes ?',d:0},{t:'Revoir les différentes pâtes (brisée, sablée…)',d:0}];
+const L=document.getElementById('tl'),A=document.getElementById('ta');
+function sv(){try{localStorage.setItem(KEY,JSON.stringify(T))}catch(e){}}
+function r(){L.innerHTML='';T.forEach((x,i)=>{const li=document.createElement('li');if(x.d)li.className='done';const c=document.createElement('input');c.type='checkbox';c.checked=!!x.d;c.onchange=()=>{x.d=c.checked?1:0;sv();r()};const s=document.createElement('span');s.textContent=x.t;const b=document.createElement('button');b.textContent='×';b.setAttribute('aria-label','Supprimer');b.onclick=()=>{T.splice(i,1);sv();r()};li.append(c,s,b);L.append(li)})}
+function add(){const v=A.value.trim();if(!v)return;T.push({t:v,d:0});A.value='';sv();r()}
+A.onkeydown=e=>{if(e.key==='Enter')add()};document.getElementById('tb').onclick=add;r();
+
+/* ===== CALENDRIER DES RECETTES DU TP ===== */
+const REC=[[2,["Poireaux vinaigrette","Macédoine de légumes et tomates mondées"]],[3,["Tarte aux oignons glacés, purée d’oignons roses","Œufs farcis Chimay"]],[4,["Omelette roulée aux fines herbes","Crème de chou-fleur Dubarry","Tempura de légumes croustillants"]],[5,["Polenta croustillante aux olives et concassé de tomates","Maquereaux pochés, sauce vin blanc et mousseline de chou-fleur au beurre noisette","Bande jalousie et frangipane"]],[6,["Soufflé au fromage","Bœuf bourguignon traditionnel","La crème brûlée et langues de chat"]],[7,["Artichaut poivrade à la grecque","Pavé de saumon à l’unilatérale, beurre blanc et salade de fenouil à l’orange","Œufs à la neige"]],[8,["Risotto vert à l’asperge","Magret et palets de navets à l’orange","Entremets Caraïbes"]],[9,["Goujonnettes de dorade et sauce hollandaise","Légumes à la grecque"]],[10,["Blanquette de veau, bouquetière de légumes","Œufs pochés et frisée aux lardons"]],[11,["Carrelet meunière, sifflets de carottes au citron et fondue de poireaux","Ballottine de saumon et saumon fumé, purée de cresson"]],[12,["Poulet basquaise et riz pilaf","Aspic de gambas et betterave poivrée"]]].map(([n,a])=>({tp:n,p:a}));
+REC.forEach((x,i)=>x.id=i);
+const CK='cap-cal3';let C={};try{C=JSON.parse(localStorage.getItem(CK)||'{}')||{}}catch(e){}
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const parD=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const lundi=d=>addD(d,-((d.getDay()+6)%7));
+if(!C.start){const t=new Date();t.setHours(0,0,0,0);C.start=iso(addD(t,((8-t.getDay())%7)||7))}
+C.days=C.days||{};C.done=C.done||{};
+const fmt=(d,o)=>d.toLocaleDateString('fr-FR',o);
+function sc(){try{localStorage.setItem(CK,JSON.stringify(C))}catch(e){}}
+function rc(){
+ const S=lundi(parD(C.start)),TD=new Date();TD.setHours(0,0,0,0);
+ const sel=Object.keys(C.days).filter(k=>k>=iso(S)).sort(),asg={};
+ sel.forEach((k,i)=>{if(i<REC.length)asg[k]=REC[i]});
+ const last=sel.length?Math.floor((parD(sel[sel.length-1])-S)/6048e5):-1;
+ const W=Math.min(16,Math.max(4,last+3));
+ let h='';const nd=REC.filter(x=>C.done[x.id]).length;
+ for(let k=0;k<W;k++){const w=addD(S,7*k);let btn='',rows='',n=0;
+  for(let j=0;j<7;j++){const d=addD(w,j),key=iso(d),on=C.days[key],x=asg[key];
+   btn+=`<button type="button" class="dy${on?' on':''}${+d===+TD?' td':''}" data-d="${key}"><small>${fmt(d,{weekday:'short'})}</small>${d.getDate()}</button>`;
+   if(on){n++;const dt=fmt(d,{weekday:'long',day:'numeric',month:'short'});
+    rows+=x?`<label class="r${C.done[x.id]?' done':''}${+d===+TD?' today':''}"><input type="checkbox" data-i="${x.id}"${C.done[x.id]?' checked':''}><span class="dt">${dt}</span><span class="nm"><small>TP n°${x.tp}</small>${x.p.map(s=>`<em>${s}</em>`).join('')}</span></label>`:`<div class="r"><span class="dt">${dt}</span><span class="nm"><small>Toutes les recettes sont déjà attribuées</small></span></div>`}}
+  h+=`<div class="wk"><h4>Semaine ${k+1} · du ${fmt(w,{day:'numeric',month:'short'})} au ${fmt(addD(w,6),{day:'numeric',month:'short'})}<span>${n} jour${n>1?'s':''}</span></h4><div class="days">${btn}</div>${rows}</div>`}
+ document.getElementById('calout').innerHTML=`<p class="prog"><b>${nd}</b> / ${REC.length} recettes réalisées · <b>${Math.min(sel.length,REC.length)}</b> planifiées</p>`+h}
+const cs=document.getElementById('cstart'),co=document.getElementById('calout');
+cs.value=C.start;
+cs.onchange=()=>{if(cs.value){C.start=cs.value;sc();rc()}};
+co.onclick=e=>{const b=e.target.closest('.dy');if(!b)return;const k=b.dataset.d;if(C.days[k])delete C.days[k];else C.days[k]=1;sc();rc()};
+co.onchange=e=>{const i=e.target.dataset.i;if(i===undefined)return;if(e.target.checked)C.done[i]=1;else delete C.done[i];sc();rc()};
+rc();
+</script></body></html>
